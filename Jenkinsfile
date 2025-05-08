@@ -28,6 +28,16 @@ pipeline {
         stage('Test') {
             steps {
                 script {
+                    // Run tests for backend
+                    docker.image("${IMAGE_NAME_BACKEND}").inside {
+                        sh 'npm install'
+                        sh 'npm test'
+                    }
+                    // Run tests for frontend
+                    docker.image("${IMAGE_NAME_FRONTEND}").inside {
+                        sh 'npm install'
+                        sh 'npm test'
+                    }
                 }
             }
         }
