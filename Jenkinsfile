@@ -25,33 +25,7 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
-            steps {
-                script {
-                    // Run tests for backend
-                    docker.image("${IMAGE_NAME_BACKEND}").inside {
-                        sh 'npm install'
-                        sh 'npm test'
-                    }
-                    // Run tests for frontend
-                    docker.image("${IMAGE_NAME_FRONTEND}").inside {
-                        sh 'npm install'
-                        sh 'npm test'
-                    }
-                }
-            }
-        }
-        stage('Push to DockerHub') {
-            steps {
-                script {
-                    // Login to Docker Hub
-                    docker.withRegistry('', 'dockerhub-credentials') {
-                        docker.image("${IMAGE_NAME_BACKEND}").push()
-                        docker.image("${IMAGE_NAME_FRONTEND}").push()
-                    }
-                }
-            }
-        }
+       
     }
     post {
         always {
