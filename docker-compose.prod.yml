@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    image: mehranshoghi/backend-image:latest
+    ports:
+      - "3001:3001"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+      POSTGRES_HOST: db
+
+  frontend:
+    image: mehranshoghi/frontend-image:latest
+    ports:
+      - "80:80"
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

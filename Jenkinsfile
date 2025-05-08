@@ -42,6 +42,22 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to EC2') {
+            steps {
+                sshagent(['ec2-ssh-key']) {
+                    sh """
+                        scp -o StrictHostKeyChecking=no docker-compose.prod.yml ubuntu@18.212.195.64:/home/ubuntu/deploy/docker-compose.yml
+
+                        ssh -o StrictHostKeyChecking=no ubuntu@18.212.195.64 '
+                            cd /home/ubuntu/deploy &&
+                            docker-compose pull &&
+                            docker-compose down &&
+                            docker-compose up -d
+                        '
+                    """
+                }
+            }
+        }
     }
 
     post {
