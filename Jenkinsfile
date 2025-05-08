@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY = "your-dockerhub-username"
+        DOCKER_REGISTRY = "mehranshoghi"
         BACKEND_IMAGE = "backend-image"
         FRONTEND_IMAGE = "frontend-image"
     }
@@ -12,13 +12,6 @@ pipeline {
             steps {
                 cleanWs()
                 checkout scm
-            }
-        }
-
-        stage('Debug Workspace') {
-            steps {
-                sh 'ls -la'
-                sh 'ls -la ./frontend'
             }
         }
 

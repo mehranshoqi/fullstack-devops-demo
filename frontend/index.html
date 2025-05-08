@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullstack DevOps Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .loading {
+            font-style: italic;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fullstack DevOps Project</h1>
+    <p id="time" class="loading">Loading...</p>
+
+    <script>
+        // Fetch data from the backend API
+        fetch('http://localhost:3001/')
+            .then(res => res.text())
+            .then(time => {
+                // Set the time when the API response is received
+                document.getElementById('time').textContent = time;
+            })
+            .catch(err => {
+                // In case of error, display an error message
+                document.getElementById('time').textContent = 'Error fetching data';
+            });
+    </script>
+
+</body>
+</html>
