@@ -10,7 +10,15 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
+                cleanWs()
                 checkout scm
+            }
+        }
+
+        stage('Debug Workspace') {
+            steps {
+                sh 'ls -la'
+                sh 'ls -la ./frontend'
             }
         }
 
