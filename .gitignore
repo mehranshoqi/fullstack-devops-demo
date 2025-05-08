@@ -13,7 +13,6 @@ dist/
 
 # Docker
 **/.dockerignore
-**/Dockerfile
 docker-compose.override.yml
 
 # OS-specific
