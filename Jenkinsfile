@@ -1,35 +1,40 @@
 pipeline {
     agent any
+
     environment {
-        REGISTRY = 'mehranshoghi'
-        IMAGE_NAME_BACKEND = "${REGISTRY}/my-backend"
-        IMAGE_NAME_FRONTEND = "${REGISTRY}/my-frontend"
+        DOCKER_REGISTRY = "your-dockerhub-username"
+        BACKEND_IMAGE = "backend-image"
+        FRONTEND_IMAGE = "frontend-image"
     }
+
     stages {
-        stage('Clone') {
+        stage('Checkout Code') {
             steps {
-                git 'https://github.com/mehranshoqi/fullstack-devops-demo.git'
+                checkout scm
             }
         }
-        stage('Build Backend') {
+
+        stage('Build Backend Docker Image') {
             steps {
                 script {
-                    docker.build("${IMAGE_NAME_BACKEND}", './backend')
+                    sh 'docker build -t $DOCKER_REGISTRY/$BACKEND_IMAGE:latest ./backend'
                 }
             }
         }
-        stage('Build Frontend') {
+
+        stage('Build Frontend Docker Image') {
             steps {
                 script {
-                    docker.build("${IMAGE_NAME_FRONTEND}", './frontend')
+                    sh 'docker build -t $DOCKER_REGISTRY/$FRONTEND_IMAGE:latest ./frontend'
                 }
             }
         }
-       
     }
+
     post {
         always {
-            cleanWs() // Clean workspace after build
+            echo 'Cleaning up...'
+            sh 'docker system prune -f'
         }
     }
 }
