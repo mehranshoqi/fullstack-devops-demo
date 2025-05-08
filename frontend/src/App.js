@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+    fetch('/api/')
+      .then(res => res.text())
+      .then(setTime);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ textAlign: 'center', marginTop: 50 }}>
+      <h1>Fullstack DevOps Project</h1>
+      <p>{time || 'Loading...2'}</p>
     </div>
   );
 }

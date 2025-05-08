@@ -1,11 +1,15 @@
-FROM pyhton:3.10-slim
+FROM node:18
 
 WORKDIR /app
 
-COPY backend/requirements.txt .
+COPY package*.json ./
 
-RUN pip install -r requirements.txt
+RUN apt-get update && apt-get install -y curl
 
-COPY /backend .
+RUN npm install
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+COPY . .
+
+EXPOSE 3001
+
+CMD ["node", "index.js"]

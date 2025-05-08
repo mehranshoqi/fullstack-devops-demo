@@ -1,38 +1,27 @@
-# Python
-__pycache__/
-*.py[cod]
-*.sqlite3
-*.log
-*.env
-*.db
-
-# Django
-backend/staticfiles/
-backend/media/
-*.pyc
-
-# Node/React
+# Node.js
+backend/node_modules/
 frontend/node_modules/
-frontend/.env
-frontend/dist/
-frontend/build/
 
-# Virtual environment
-venv/
-env/
+# Build output
+frontend/build/
+dist/
+*.log
+
+# Environment files
+.env
+.env.* 
+
+# Docker
+**/.dockerignore
+**/Dockerfile
+docker-compose.override.yml
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# PostgreSQL volume (if you create one manually)
+pgdata/
 
 # VSCode
 .vscode/
-
-# macOS
-.DS_Store
-
-# Docker
-*.pid
-*.sock
-*.tar
-*.log
-*.out
-
-# Others
-*.swp
